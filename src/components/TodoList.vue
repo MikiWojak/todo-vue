@@ -32,6 +32,10 @@ export default {
 
   methods: {
     addTodo() {
+      if(this.newTodo === '') {
+        return;
+      }
+
       this.todos.push({
         id: this.idForTodo,
         title: this.newTodo,
