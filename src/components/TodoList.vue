@@ -2,19 +2,21 @@
   <div>
     <input type="text" class="todo-input" placeholder="What needs to be done" v-model="newTodo" @keyup.enter="addTodo">
 
-    <div v-for="(todo, index) in todos" :key="todo.id" class="todo-item">
-      <div class="todo-item-left">
-          <input type="checkbox" v-model="todo.completed">
+    <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">     
+      <div v-for="(todo, index) in todos" :key="todo.id" class="todo-item">
+        <div class="todo-item-left">
+            <input type="checkbox" v-model="todo.completed">
 
-          <div v-if="!todo.editing" @dblclick="editTodo(todo)" class="todo-item-label" :class="{ completed: todo.completed }">{{ todo.title }}</div>
+            <div v-if="!todo.editing" @dblclick="editTodo(todo)" class="todo-item-label" :class="{ completed: todo.completed }">{{ todo.title }}</div>
 
-          <input v-else class="todo-item-edit" type="text" v-model="todo.title" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" v-focus @keyup.esc="cancelEdit(todo)">
+            <input v-else class="todo-item-edit" type="text" v-model="todo.title" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" v-focus @keyup.esc="cancelEdit(todo)">
+        </div>
+
+        <div class="remove-item" @click="removeTodo(index)">
+          &times;
+        </div>
       </div>
-
-      <div class="remove-item" @click="removeTodo(index)">
-        &times;
-      </div>
-    </div>
+    </transition-group>
   </div>
 </template>
 
@@ -92,6 +94,8 @@ export default {
 </script>
 
 <style>
+  @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css");
+
   .todo-input {
     width: 96%;
     padding: 10px 2%;
@@ -108,6 +112,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    animation-duration: 0.3s;
   }
 
   .remove-item {
