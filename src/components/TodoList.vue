@@ -3,7 +3,7 @@
     <input type="text" class="todo-input" placeholder="What needs to be done" v-model="newTodo" @keyup.enter="addTodo">
 
     <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">     
-      <todo-item v-for="(todo, index) in todos" :key="todo.id" :todo="todo" :index="index" @removedTodo="removeTodo">
+      <todo-item v-for="(todo, index) in todos" :key="todo.id" :todo="todo" :index="index" @removedTodo="removeTodo" @finishedEdit="finishedEdit">
         <!-- <div class="todo-item-left">
             <input type="checkbox" v-model="todo.completed">
 
@@ -75,26 +75,30 @@ export default {
       this.idForTodo++;
     },
 
-    editTodo(todo) {
-      this.beforeEditCache = todo.title;
-      todo.editing = true;
-    },
+    // editTodo(todo) {
+    //   this.beforeEditCache = todo.title;
+    //   todo.editing = true;
+    // },
 
-    doneEdit(todo) {
-      if (todo.title.trim() === '') { 
-        todo.title = this.beforeEditCache;
-      }
+    // doneEdit(todo) {
+    //   if (todo.title.trim() === '') { 
+    //     todo.title = this.beforeEditCache;
+    //   }
 
-      todo.editing = false;
-    },
+    //   todo.editing = false;
+    // },
 
-    cancelEdit(todo) {
-      todo.title = this.beforeEditCache;
-      todo.editing = false;
-    },
+    // cancelEdit(todo) {
+    //   todo.title = this.beforeEditCache;
+    //   todo.editing = false;
+    // },
 
     removeTodo(index) {
       this.todos.splice(index, 1);
+    },
+
+    finishedEdit(data) {
+      this.todos.splice(data.index, 1, data.todo);
     }
   }
 }
