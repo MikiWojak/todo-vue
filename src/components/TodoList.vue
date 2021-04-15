@@ -3,7 +3,7 @@
     <input type="text" class="todo-input" placeholder="What needs to be done" v-model="newTodo" @keyup.enter="addTodo">
 
     <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">     
-      <todo-item v-for="(todo, index) in todos" :key="todo.id" :todo="todo" :index="index">
+      <todo-item v-for="(todo, index) in todos" :key="todo.id" :todo="todo" :index="index" @removedTodo="removeTodo">
         <!-- <div class="todo-item-left">
             <input type="checkbox" v-model="todo.completed">
 
