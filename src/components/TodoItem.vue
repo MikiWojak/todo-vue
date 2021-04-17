@@ -8,7 +8,7 @@
             <input v-else class="todo-item-edit" type="text" v-model="title" @blur="doneEdit" @keyup.enter="doneEdit" v-focus @keyup.esc="cancelEdit">
         </div>
 
-        <div class="remove-item" @click="removeTodo(index)">
+        <div class="remove-item" @click="removeTodo(todo.id)">
             &times;
         </div>
     </div>
@@ -21,11 +21,6 @@ export default {
     props: {
         todo: {
             type: Object,
-            required: true
-        },
-
-        index: {
-            type: Number,
             required: true
         }
     },
@@ -41,8 +36,8 @@ export default {
     },
 
     methods: {
-        removeTodo(index) {
-            this.$emit('removedTodo', index);
+        removeTodo(id) {
+            this.$emit('removedTodo', id);
         },
 
         editTodo() {
@@ -58,13 +53,10 @@ export default {
             this.editing = false;
 
             this.$emit('finishedEdit', {
-                'index': this.index,
-                'todo': {
-                    'id': this.id,
-                    'title': this.title,
-                    'completed': this.completed,
-                    'editing': this.editing
-                }
+                'id': this.id,
+                'title': this.title,
+                'completed': this.completed,
+                'editing': this.editing
             });
         },
 

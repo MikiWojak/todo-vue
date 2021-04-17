@@ -3,7 +3,7 @@
     <input type="text" class="todo-input" placeholder="What needs to be done" v-model="newTodo" @keyup.enter="addTodo">
 
     <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">     
-      <todo-item v-for="(todo, index) in todos" :key="todo.id" :todo="todo" :index="index" @removedTodo="removeTodo" @finishedEdit="finishedEdit">
+      <todo-item v-for="todo in todos" :key="todo.id" :todo="todo" @removedTodo="removeTodo" @finishedEdit="finishedEdit">
         <!-- <div class="todo-item-left">
             <input type="checkbox" v-model="todo.completed">
 
@@ -93,12 +93,14 @@ export default {
     //   todo.editing = false;
     // },
 
-    removeTodo(index) {
+    removeTodo(id) {
+      const index = this.todos.findIndex((item) => item.id === id);
       this.todos.splice(index, 1);
     },
 
     finishedEdit(data) {
-      this.todos.splice(data.index, 1, data.todo);
+      const index = this.todos.findIndex((item) => item.id === data.id);
+      this.todos.splice(index, 1, data);
     }
   }
 }
