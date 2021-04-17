@@ -35,6 +35,14 @@ export default {
         }
     },
 
+    directives: {
+        focus: {
+            inserted: function (el) {
+                el.focus();
+            }
+        }
+    },
+
     methods: {
         removeTodo(id) {
             this.$emit('removedTodo', id);
