@@ -46,6 +46,11 @@ export default {
     eventBus.$on('finishedEdit', (data) => this.finishedEdit(data));
   },
 
+  beforeDestroy() {
+    eventBus.$off('removedTodo', (index) => this.removeTodo(index));
+    eventBus.$off('finishedEdit', (data) => this.finishedEdit(data));
+  },
+
   methods: {
     addTodo() {
       if (this.newTodo.trim() === '') { return; }
