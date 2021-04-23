@@ -45,7 +45,8 @@ export default {
 
     methods: {
         removeTodo(id) {
-            eventBus.$emit('removedTodo', id);
+            const index = this.$store.state.todos.findIndex((item) => item.id === id);
+            this.$store.state.todos.splice(index, 1);
         },
 
         editTodo() {

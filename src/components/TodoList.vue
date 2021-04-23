@@ -42,13 +42,13 @@ export default {
   },
 
   created() {
-    eventBus.$on('removedTodo', (index) => this.removeTodo(index));
-    eventBus.$on('finishedEdit', (data) => this.finishedEdit(data));
+    eventBus.$on('removedTodo', id => this.removeTodo(id));
+    eventBus.$on('finishedEdit', data => this.finishedEdit(data));
   },
 
   beforeDestroy() {
-    eventBus.$off('removedTodo', (index) => this.removeTodo(index));
-    eventBus.$off('finishedEdit', (data) => this.finishedEdit(data));
+    eventBus.$off('removedTodo');
+    eventBus.$off('finishedEdit');
   },
 
   methods: {
