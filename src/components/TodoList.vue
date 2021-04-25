@@ -24,43 +24,44 @@ export default {
      newTodo: '',
      idForTodo: 3,
      beforeEditCache: '',
-     todos: [
-       {
-        'id': 1,
-        'title': 'Finish Vue Screencast',
-        'completed': false,
-        'editing': false
-       },
-       {
-        'id': 2,
-        'title': 'Take over world',
-        'completed': false,
-        'editing': false
-       },
-     ]
+    //  todos: [
+    //    {
+    //     'id': 1,
+    //     'title': 'Finish Vue Screencast',
+    //     'completed': false,
+    //     'editing': false
+    //    },
+    //    {
+    //     'id': 2,
+    //     'title': 'Take over world',
+    //     'completed': false,
+    //     'editing': false
+    //    },
+    //  ]
     }
   },
 
-  created() {
-    // eventBus.$on('removedTodo', id => this.removeTodo(id));
-    eventBus.$on('finishedEdit', data => this.finishedEdit(data));
-  },
-
-  beforeDestroy() {
-    // eventBus.$off('removedTodo');
-    eventBus.$off('finishedEdit');
+  computed: {
+    todos() {
+      return this.$store.state.todos;
+    }
   },
 
   methods: {
     addTodo() {
       if (this.newTodo.trim() === '') { return; }
 
-      this.$store.state.todos.push({
+      this.$store.commit('addTodo', {
         id: this.idForTodo,
-        title: this.newTodo,
-        completed: false,
-        editing: false
+        title: this.newTodo
       });
+
+      // this.$store.state.todos.push({
+      //   id: this.idForTodo,
+      //   title: this.newTodo,
+      //   completed: false,
+      //   editing: false
+      // });
 
       this.newTodo = '';
       this.idForTodo++;

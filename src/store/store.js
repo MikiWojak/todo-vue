@@ -19,5 +19,16 @@ export const store = new Vuex.Store({
              'editing': false
             },
         ]
+    },
+
+    mutations: {
+        addTodo(state, todo) {
+            state.todos.push({
+                id: todo.id,
+                title: todo.title,
+                completed: false,
+                editing: false
+            });
+        }
     }
 });
