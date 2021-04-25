@@ -42,12 +42,12 @@ export default {
   },
 
   created() {
-    eventBus.$on('removedTodo', id => this.removeTodo(id));
+    // eventBus.$on('removedTodo', id => this.removeTodo(id));
     eventBus.$on('finishedEdit', data => this.finishedEdit(data));
   },
 
   beforeDestroy() {
-    eventBus.$off('removedTodo');
+    // eventBus.$off('removedTodo');
     eventBus.$off('finishedEdit');
   },
 
@@ -66,13 +66,13 @@ export default {
       this.idForTodo++;
     },
 
-    removeTodo(id) {
-      const index = this.$store.state.todos.findIndex((item) => item.id === id);
-      this.$store.state.todos.splice(index, 1);
-    },
+    // removeTodo(id) {
+    //   const index = this.$store.state.todos.findIndex(item => item.id === id);
+    //   this.$store.state.todos.splice(index, 1);
+    // },
 
     finishedEdit(data) {
-      const index = this.$store.state.todos.findIndex((item) => item.id === data.id);
+      const index = this.$store.state.todos.findIndex(item => item.id === data.id);
       this.$store.state.todos.splice(index, 1, data);
     }
   }
