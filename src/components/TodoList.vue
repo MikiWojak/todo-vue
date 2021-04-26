@@ -51,7 +51,7 @@ export default {
     addTodo() {
       if (this.newTodo.trim() === '') { return; }
 
-      this.$store.commit('addTodo', {
+      this.$store.dispatch('addTodo', {
         id: this.idForTodo,
         title: this.newTodo
       });

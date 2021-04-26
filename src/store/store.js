@@ -45,5 +45,19 @@ export const store = new Vuex.Store({
             const index = state.todos.findIndex(item => item.id === id);
             state.todos.splice(index, 1);
         }
+    },
+
+    actions: {
+        addTodo(context, todo) {
+            context.commit('addTodo', todo);
+        },
+
+        updateTodo(context, todo) {
+            context.commit('updateTodo', todo);
+        },
+
+        removeTodo(context, id) {
+            context.commit('removeTodo', id);
+        }
     }
 });

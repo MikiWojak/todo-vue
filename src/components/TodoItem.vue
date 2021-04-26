@@ -45,7 +45,7 @@ export default {
 
     methods: {
         removeTodo(id) {
-            this.$store.commit('removeTodo', id);
+            this.$store.dispatch('removeTodo', id);
         },
 
         editTodo() {
@@ -60,7 +60,7 @@ export default {
 
             this.editing = false;
 
-            this.$store.commit('updateTodo', {
+            this.$store.dispatch('updateTodo', {
                 'id': this.id,
                 'title': this.title,
                 'completed': this.completed,
