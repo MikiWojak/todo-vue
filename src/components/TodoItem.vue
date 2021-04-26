@@ -66,13 +66,6 @@ export default {
                 'completed': this.completed,
                 'editing': this.editing
             });
-
-            // eventBus.$emit('finishedEdit', {
-            //     'id': this.id,
-            //     'title': this.title,
-            //     'completed': this.completed,
-            //     'editing': this.editing
-            // });
         },
 
         cancelEdit() {
