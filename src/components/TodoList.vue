@@ -21,59 +21,28 @@ export default {
 
   data () {
     return {
-     newTodo: '',
-     idForTodo: 3,
-     beforeEditCache: '',
-     todos: [
-       {
-        'id': 1,
-        'title': 'Finish Vue Screencast',
-        'completed': false,
-        'editing': false
-       },
-       {
-        'id': 2,
-        'title': 'Take over world',
-        'completed': false,
-        'editing': false
-       },
-     ]
+      newTodo: '',
+      idForTodo: 3
     }
   },
 
-  created() {
-    eventBus.$on('removedTodo', (index) => this.removeTodo(index));
-    eventBus.$on('finishedEdit', (data) => this.finishedEdit(data));
-  },
-
-  beforeDestroy() {
-    eventBus.$off('removedTodo', (index) => this.removeTodo(index));
-    eventBus.$off('finishedEdit', (data) => this.finishedEdit(data));
+  computed: {
+    todos() {
+      return this.$store.state.todos;
+    }
   },
 
   methods: {
     addTodo() {
       if (this.newTodo.trim() === '') { return; }
 
-      this.todos.push({
+      this.$store.dispatch('addTodo', {
         id: this.idForTodo,
-        title: this.newTodo,
-        completed: false,
-        editing: false
+        title: this.newTodo
       });
 
       this.newTodo = '';
       this.idForTodo++;
-    },
-
-    removeTodo(id) {
-      const index = this.todos.findIndex((item) => item.id === id);
-      this.todos.splice(index, 1);
-    },
-
-    finishedEdit(data) {
-      const index = this.todos.findIndex((item) => item.id === data.id);
-      this.todos.splice(index, 1, data);
     }
   }
 }

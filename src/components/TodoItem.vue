@@ -1,7 +1,7 @@
 <template>
     <div class="todo-item">
         <div class="todo-item-left">
-            <input type="checkbox" v-model="completed">
+            <input type="checkbox" v-model="completed" @change="doneEdit">
 
             <div v-if="!editing" @dblclick="editTodo" class="todo-item-label" :class="{ completed: completed }">{{ title }}</div>
 
@@ -45,7 +45,7 @@ export default {
 
     methods: {
         removeTodo(id) {
-            eventBus.$emit('removedTodo', id);
+            this.$store.dispatch('removeTodo', id);
         },
 
         editTodo() {
@@ -60,7 +60,7 @@ export default {
 
             this.editing = false;
 
-            eventBus.$emit('finishedEdit', {
+            this.$store.dispatch('updateTodo', {
                 'id': this.id,
                 'title': this.title,
                 'completed': this.completed,
