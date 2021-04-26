@@ -56,25 +56,8 @@ export default {
         title: this.newTodo
       });
 
-      // this.$store.state.todos.push({
-      //   id: this.idForTodo,
-      //   title: this.newTodo,
-      //   completed: false,
-      //   editing: false
-      // });
-
       this.newTodo = '';
       this.idForTodo++;
-    },
-
-    // removeTodo(id) {
-    //   const index = this.$store.state.todos.findIndex(item => item.id === id);
-    //   this.$store.state.todos.splice(index, 1);
-    // },
-
-    finishedEdit(data) {
-      const index = this.$store.state.todos.findIndex(item => item.id === data.id);
-      this.$store.state.todos.splice(index, 1, data);
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="todo-item">
         <div class="todo-item-left">
-            <input type="checkbox" v-model="completed">
+            <input type="checkbox" v-model="completed" @change="doneEdit">
 
             <div v-if="!editing" @dblclick="editTodo" class="todo-item-label" :class="{ completed: completed }">{{ title }}</div>
 
@@ -45,8 +45,7 @@ export default {
 
     methods: {
         removeTodo(id) {
-            const index = this.$store.state.todos.findIndex(item => item.id === id);
-            this.$store.state.todos.splice(index, 1);
+            this.$store.commit('removeTodo', id);
         },
 
         editTodo() {
@@ -61,8 +60,7 @@ export default {
 
             this.editing = false;
 
-            const index = this.$store.state.todos.findIndex(item => item.id === this.id);
-            this.$store.state.todos.splice(index, 1, {
+            this.$store.commit('updateTodo', {
                 'id': this.id,
                 'title': this.title,
                 'completed': this.completed,

@@ -29,6 +29,21 @@ export const store = new Vuex.Store({
                 completed: false,
                 editing: false
             });
+        },
+
+        updateTodo(state, todo) {
+            const index = state.todos.findIndex(item => item.id === todo.id);
+            state.todos.splice(index, 1, {
+                'id': todo.id,
+                'title': todo.title,
+                'completed': todo.completed,
+                'editing': todo.editing
+            });
+        },
+
+        removeTodo(state, id) {
+            const index = state.todos.findIndex(item => item.id === id);
+            state.todos.splice(index, 1);
         }
     }
 });
