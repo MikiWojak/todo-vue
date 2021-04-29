@@ -52,7 +52,16 @@ export const store = new Vuex.Store({
         },
 
         addTodo(context, todo) {
-            context.commit('addTodo', todo);
+            axios.post('/todos', {
+                title: todo.title,
+                completed: false
+            })
+                .then(response => {
+                    context.commit('addTodo', response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
 
         updateTodo(context, todo) {
