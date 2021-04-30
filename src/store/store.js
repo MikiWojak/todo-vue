@@ -1,27 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex);
+axios.defaults.baseURL = 'http://localhost/todo-laravel/public/api';
 
 export const store = new Vuex.Store({
     state: {
-        todos: [
-            {
-             'id': 1,
-             'title': 'Finish Vue Screencast',
-             'completed': false,
-             'editing': false
-            },
-            {
-             'id': 2,
-             'title': 'Take over world',
-             'completed': false,
-             'editing': false
-            },
-        ]
+        todos: []
     },
 
     mutations: {
+        retrieveTodos(state, todos) {
+            state.todos = todos;
+        },
+
         addTodo(state, todo) {
             state.todos.push({
                 id: todo.id,
@@ -48,16 +41,50 @@ export const store = new Vuex.Store({
     },
 
     actions: {
+        retrieveTodos(context) {
+            axios.get('/todos')
+                .then(response => {
+                    context.commit('retrieveTodos', response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+
         addTodo(context, todo) {
-            context.commit('addTodo', todo);
+            axios.post('/todos', {
+                title: todo.title,
+                completed: false
+            })
+                .then(response => {
+                    context.commit('addTodo', response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
 
         updateTodo(context, todo) {
-            context.commit('updateTodo', todo);
+            axios.patch('/todos/' + todo.id, {
+                title: todo.title,
+                completed: todo.completed
+            })
+                .then(response => {
+                    context.commit('updateTodo', response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
 
         removeTodo(context, id) {
-            context.commit('removeTodo', id);
+            axios.delete('/todos/' + id)
+                .then(response => {
+                    context.commit('removeTodo', id);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         }
     }
 });
