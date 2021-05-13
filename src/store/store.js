@@ -7,6 +7,7 @@ axios.defaults.baseURL = 'http://localhost/todo-laravel/public/api';
 
 export const store = new Vuex.Store({
     state: {
+        token: localStorage.getItem('access_token') || null,
         todos: []
     },
 
@@ -37,10 +38,33 @@ export const store = new Vuex.Store({
         removeTodo(state, id) {
             const index = state.todos.findIndex(item => item.id === id);
             state.todos.splice(index, 1);
+        },
+
+        retrieveToken(state, token) {
+            state.token = token;
         }
     },
 
     actions: {
+        retrieveToken(context, credentials) {
+            axios.post('/login', {
+                username: credentials.username,
+                password: credentials.password
+            })
+                .then(response => {
+                    const token = response.data.access_token;
+
+                    localStorage.setItem('access_token', token);
+                    context.commit('retrieveToken', token);
+
+                    // console.log(response);
+                    // context.commit('addTodo', response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+
         retrieveTodos(context) {
             axios.get('/todos')
                 .then(response => {
