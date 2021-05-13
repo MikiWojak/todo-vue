@@ -38,7 +38,10 @@ export default {
             this.$store.dispatch('retrieveToken', {
                 username: this.username,
                 password: this.password
-            });
+            })
+                .then(response => {
+                    this.$router.push({ name: 'todo' });
+                })
         }
     }
 }
