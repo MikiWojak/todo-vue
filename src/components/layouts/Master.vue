@@ -89,6 +89,8 @@ export default {
         outline: 0;
         border-radius: 3px;
         border: 1px solid lightgrey;
+
+        box-sizing: border-box;
     }
 
     .btn-submit {
