@@ -57,12 +57,14 @@ export const store = new Vuex.Store({
 
                         localStorage.setItem('access_token', token);
                         context.commit('retrieveToken', token);
+                        resolve(response);
 
                         // console.log(response);
                         // context.commit('addTodo', response.data);
                     })
                     .catch(error => {
                         console.log(error);
+                        reject(error);
                     })
             });
         },
