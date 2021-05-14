@@ -56,10 +56,12 @@ export default {
   @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css");
 
   .todo-input {
-    width: 96%;
-    padding: 10px 2%;
+    width: 100%;
+    padding: 10px 18px;
     font-size: 18px;
     margin-bottom: 16px;
+
+    box-sizing: border-box;
   }
 
   .todo-input:focus {
