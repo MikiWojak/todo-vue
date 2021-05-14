@@ -2,6 +2,7 @@ import App from './App'
 import LandingPage from './components/marketing/LandingPage'
 import About from './components/marketing/About'
 import Login from './components/auth/Login'
+import Logout from './components/auth/Logout'
 import Register from './components/auth/Register'
 
 const routes = [
@@ -29,6 +30,11 @@ const routes = [
     path: '/register',
     name: 'register',
     component: Register
+  },
+  {
+    path: '/logout',
+    name: 'logout',
+    component: Logout
   },
 ];
 

@@ -11,6 +11,12 @@ export const store = new Vuex.Store({
         todos: []
     },
 
+    getters: {
+        loggedIn(state) {
+            return state.token !== null;
+        }
+    },
+
     mutations: {
         retrieveTodos(state, todos) {
             state.todos = todos;
