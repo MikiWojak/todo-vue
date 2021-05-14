@@ -48,6 +48,10 @@ export const store = new Vuex.Store({
 
         retrieveToken(state, token) {
             state.token = token;
+        },
+
+        destroyToken(state) {
+            state.token = null;
         }
     },
 
@@ -73,6 +77,27 @@ export const store = new Vuex.Store({
                         reject(error);
                     })
             });
+        },
+
+        destroyToken(context) {
+            if (context.getters.loggedIn) {
+                return new Promise((resolve, reject) => {
+                    axios.post('/logout')
+                        .then(response => {
+                            localStorage.removeItem('access_token');
+                            context.commit('destroyToken');
+                            resolve(response);
+    
+                            // console.log(response);
+                            // context.commit('addTodo', response.data);
+                        })
+                        .catch(error => {
+                            localStorage.removeItem('access_token');
+                            context.commit('destroyToken');
+                            reject(error);
+                        })
+                });
+            }
         },
 
         retrieveTodos(context) {
