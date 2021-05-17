@@ -18,6 +18,10 @@ export const store = new Vuex.Store({
     },
 
     mutations: {
+        clearTodos(state) {
+            state.todos = [];
+        },
+
         retrieveTodos(state, todos) {
             state.todos = todos;
         },
@@ -84,9 +88,6 @@ export const store = new Vuex.Store({
                         localStorage.setItem('access_token', token);
                         context.commit('retrieveToken', token);
                         resolve(response);
-
-                        // console.log(response);
-                        // context.commit('addTodo', response.data);
                     })
                     .catch(error => {
                         console.log(error);
@@ -114,6 +115,10 @@ export const store = new Vuex.Store({
                         })
                 });
             }
+        },
+
+        clearTodos(context) {
+            context.commit('clearTodos');
         },
 
         retrieveTodos(context) {
