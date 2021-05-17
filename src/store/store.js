@@ -18,6 +18,10 @@ export const store = new Vuex.Store({
     },
 
     mutations: {
+        clearTodos(state) {
+            state.todos = [];
+        },
+
         retrieveTodos(state, todos) {
             state.todos = todos;
         },
@@ -84,9 +88,6 @@ export const store = new Vuex.Store({
                         localStorage.setItem('access_token', token);
                         context.commit('retrieveToken', token);
                         resolve(response);
-
-                        // console.log(response);
-                        // context.commit('addTodo', response.data);
                     })
                     .catch(error => {
                         console.log(error);
@@ -96,6 +97,7 @@ export const store = new Vuex.Store({
         },
 
         destroyToken(context) {
+            //Header or not working
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token;
 
             if (context.getters.loggedIn) {
@@ -105,9 +107,6 @@ export const store = new Vuex.Store({
                             localStorage.removeItem('access_token');
                             context.commit('destroyToken');
                             resolve(response);
-    
-                            // console.log(response);
-                            // context.commit('addTodo', response.data);
                         })
                         .catch(error => {
                             localStorage.removeItem('access_token');
@@ -118,7 +117,14 @@ export const store = new Vuex.Store({
             }
         },
 
+        clearTodos(context) {
+            context.commit('clearTodos');
+        },
+
         retrieveTodos(context) {
+            //Header or 401
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token;
+
             axios.get('/todos')
                 .then(response => {
                     context.commit('retrieveTodos', response.data);
