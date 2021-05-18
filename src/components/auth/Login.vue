@@ -4,19 +4,21 @@
 
         <form action="#" @submit.prevent="login">
 
-        <div class="form-control">
-            <label for="email">Username/Email</label>
-            <input type="email" name="username" id="username" class="login-input" v-model="username">
-        </div>
+            <div v-if="serverError" class="server-error">{{ serverError }}</div>
 
-        <div class="form-control mb-more">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" class="login-input" v-model="password">
-        </div>
+            <div class="form-control">
+                <label for="email">Username/Email</label>
+                <input type="email" name="username" id="username" class="login-input" v-model="username">
+            </div>
 
-        <div class="form-control">
-            <button type="submit" class="btn-submit">Login</button>
-        </div>
+            <div class="form-control mb-more">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="login-input" v-model="password">
+            </div>
+
+            <div class="form-control">
+                <button type="submit" class="btn-submit">Login</button>
+            </div>
 
         </form>
     </div>
@@ -29,7 +31,8 @@ export default {
     data() {
         return {
             username: '',
-            password: ''
+            password: '',
+            serverError: ''
         }
     },
 
@@ -42,6 +45,20 @@ export default {
                 .then(response => {
                     this.$router.push({ name: 'todo' });
                 })
+                .catch(error => {
+                    //Not sure it should be like this...
+                    switch(error.response.status) {
+                        case 400:
+                        case 401:
+                            this.serverError = "Your credentials are incorrect. Please try again";
+                            break;
+                        default:
+                            this.serverError = "Something went wrong";
+                            break;
+                    }
+
+                    this.password = '';
+                });
         }
     }
 }
