@@ -11,20 +11,29 @@
                 </div>
             </div>
 
-            <div class="form-control">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" class="login-input" v-model="name">
-            </div>
+            <validation-provider rules="required" v-slot="{ errors }">
+                <div class="form-control">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" class="login-input" v-model="name">
+                    <span>{{ errors[0] }}</span>
+                </div>
+            </validation-provider>
 
-            <div class="form-control">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" class="login-input" v-model="email">
-            </div>
+            <validation-provider rules="required|email" v-slot="{ errors }">
+                <div class="form-control">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" class="login-input" v-model="email">
+                    <span>{{ errors[0] }}</span>
+                </div>
+            </validation-provider>
 
-            <div class="form-control mb-more">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="login-input" v-model="password">
-            </div>
+            <validation-provider rules="required|min:6" v-slot="{ errors }">
+                <div class="form-control mb-more">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="login-input" v-model="password">
+                    <span>{{ errors[0] }}</span>
+                </div>
+            </validation-provider>
 
             <div class="form-control">
                 <button type="submit" class="btn-submit">Create Account</button>
@@ -35,7 +44,13 @@
 </template>
 
 <script>
+import { ValidationProvider} from 'vee-validate'
+
 export default {
+    components: {
+        ValidationProvider
+    },
+
     data() {
         return {
             name: '',
