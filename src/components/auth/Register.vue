@@ -14,24 +14,24 @@
             <validation-provider rules="required" v-slot="{ errors }">
                 <div class="form-control">
                     <label for="name">Name</label>
-                    <input type="text" name="name" id="name" class="login-input" v-model="name">
-                    <span>{{ errors[0] }}</span>
+                    <input type="text" name="name" id="name" class="login-input" :class="{ 'input-error' : errors[0] }" v-model="name">
+                    <span class="form-error">{{ errors[0] }}</span>
                 </div>
             </validation-provider>
 
             <validation-provider rules="required|email" v-slot="{ errors }">
                 <div class="form-control">
                     <label for="email">Email</label>
-                    <input type="text" name="email" id="email" class="login-input" v-model="email">
-                    <span>{{ errors[0] }}</span>
+                    <input type="text" name="email" id="email" class="login-input" :class="{ 'input-error' : errors[0] }" v-model="email">
+                    <span class="form-error">{{ errors[0] }}</span>
                 </div>
             </validation-provider>
 
             <validation-provider rules="required|min:6" v-slot="{ errors }">
                 <div class="form-control mb-more">
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password" class="login-input" v-model="password">
-                    <span>{{ errors[0] }}</span>
+                    <input type="password" name="password" id="password" class="login-input" :class="{ 'input-error' : errors[0] }" v-model="password">
+                    <span class="form-error">{{ errors[0] }}</span>
                 </div>
             </validation-provider>
 
