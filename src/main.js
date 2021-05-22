@@ -5,7 +5,7 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 import Master from './components/layouts/Master'
 import { store } from './store/store'
-import { ValidationProvider, extend } from 'vee-validate';
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, email, min } from 'vee-validate/dist/rules';
 
 //EventBus
@@ -71,7 +71,8 @@ new Vue({
   store: store,
   components: {
     Master,
-    ValidationProvider
+    ValidationProvider,
+    ValidationObserver
   },
   template: '<Master/>'
 })
