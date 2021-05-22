@@ -4,6 +4,10 @@
 
         <form action="#" @submit.prevent="login">
 
+            <div v-if="dataSuccessMessage" class="success-message">
+                {{ dataSuccessMessage }}
+            </div>
+
             <div v-if="serverError" class="server-error">{{ serverError }}</div>
 
             <div class="form-control">
@@ -27,6 +31,12 @@
 <script>
 export default {
     name: 'login',
+
+    props: {
+        dataSuccessMessage: {
+            type: String
+        }
+    },
 
     data() {
         return {

@@ -5,6 +5,10 @@
         <validation-observer v-slot="{ invalid }">
             <form action="#" @submit.prevent="validate(invalid)">
 
+                <!-- <div v-if="successMessage" class="success-message">
+                    {{ successMessage }}
+                </div> -->
+
                 <div v-if="serverErrors" class="server-error">
                     <div v-for="(value, key) in serverErrors" :key="key">
                         {{ value[0] }}
@@ -59,7 +63,8 @@ export default {
             name: '',
             email: '',
             password: '',
-            serverErrors: ''
+            serverErrors: '',
+            successMessage: ''
         }
     },
 
@@ -77,7 +82,13 @@ export default {
                 password: this.password
             })
                 .then(response => {
-                    this.$router.push({ name: 'login' });
+                    this.successMessage = 'Registered successfully!';
+                    this.$router.push({
+                        name: 'login',
+                        params: {
+                            dataSuccessMessage: this.successMessage
+                        }
+                    });
                 })
                 .catch(error => {
                     this.serverErrors = Object.values(error.response.data.errors);

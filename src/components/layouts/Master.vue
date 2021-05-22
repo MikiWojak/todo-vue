@@ -114,6 +114,15 @@ export default {
         background: #468a3b;
     }
 
+    .success-message {
+        background-color: #dff0d8;
+        color: #3c763d;
+        margin-bottom: 12px;
+        font-size: 16px;
+        padding: 10px 16px;
+        border-radius: 4px;
+    }
+
     .server-error {
         margin-bottom: 12px;
         font-size: 16px;
