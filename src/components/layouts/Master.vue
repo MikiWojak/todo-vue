@@ -24,6 +24,8 @@ export default {
 </script>
 
 <style>
+    @import url('cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css');
+
     body {
         box-sizing: border-box;
         margin: 0;

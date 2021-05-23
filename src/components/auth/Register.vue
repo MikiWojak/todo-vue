@@ -89,6 +89,11 @@ export default {
                             dataSuccessMessage: this.successMessage
                         }
                     });
+
+                    this.$toast.success({
+                        title: this.successMessage,
+                        message:'You can log in here'
+                    });
                 })
                 .catch(error => {
                     this.serverErrors = Object.values(error.response.data.errors);
