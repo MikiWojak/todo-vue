@@ -21,7 +21,12 @@
             </div>
 
             <div class="form-control">
-                <button type="submit" class="btn-submit">Login</button>
+                <button type="submit" class="btn-submit" :disabled="loading">
+                    <div class="lds-ring-container" v-if="loading">
+                        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                    </div>
+                    Login
+                </button>
             </div>
 
         </form>
@@ -43,20 +48,25 @@ export default {
             username: '',
             password: '',
             serverError: '',
-            successMessage: this.dataSuccessMessage
+            successMessage: this.dataSuccessMessage,
+            loading: false
         }
     },
 
     methods: {
         login() {
+            this.loading = true;
+
             this.$store.dispatch('retrieveToken', {
                 username: this.username,
                 password: this.password
             })
                 .then(response => {
+                    this.loading = false;
                     this.$router.push({ name: 'todo' });
                 })
                 .catch(error => {
+                    this.loading = false;
                     //Not sure it should be like this...
                     switch(error.response.status) {
                         case 400:
