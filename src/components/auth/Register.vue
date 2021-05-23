@@ -1,6 +1,5 @@
-
 <template>
-    <div class="login-form">
+    <div class="page-wrapper login-form">
         <h2 class="login-heading">Register</h2>
         <validation-observer v-slot="{ invalid }">
             <form action="#" @submit.prevent="validate(invalid)">

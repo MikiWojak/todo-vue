@@ -62,8 +62,6 @@ export default {
 </script>
 
 <style>
-  @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css");
-
   .todo-input {
     width: 100%;
     padding: 10px 18px;

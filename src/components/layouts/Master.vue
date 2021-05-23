@@ -9,7 +9,9 @@
             <li v-if="loggedIn"><router-link :to="{ name: 'logout' }">Logout</router-link></li>
         </ul>
 
-        <router-view></router-view>
+        <transition name="router-animation" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
@@ -24,6 +26,7 @@ export default {
 </script>
 
 <style>
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css");
     @import url('cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css');
 
     body {
@@ -141,5 +144,9 @@ export default {
     
     .input-error {
         border: 1px solid red;
+    }
+
+    .page-wrapper {
+        animation-duration: 0.2s;
     }
 </style>
