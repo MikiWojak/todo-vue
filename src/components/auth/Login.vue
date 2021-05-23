@@ -4,8 +4,8 @@
 
         <form action="#" @submit.prevent="login">
 
-            <div v-if="dataSuccessMessage" class="success-message">
-                {{ dataSuccessMessage }}
+            <div v-if="successMessage" class="success-message">
+                {{ successMessage }}
             </div>
 
             <div v-if="serverError" class="server-error">{{ serverError }}</div>
@@ -42,7 +42,8 @@ export default {
         return {
             username: '',
             password: '',
-            serverError: ''
+            serverError: '',
+            successMessage: this.dataSuccessMessage
         }
     },
 
@@ -68,6 +69,7 @@ export default {
                     }
 
                     this.password = '';
+                    this.successMessage = '';
                 });
         }
     }
