@@ -2,6 +2,18 @@
 
 > A Vue.js project
 
+The project is the Client for the [Laravel server](https://github.com/MikiWojak/todo-laravel)
+
+## General Setup
+
+- Clone the repository
+- Edit the address of the server API in src/store/store.js
+
+``` javascript
+// Address of the server API - line 6
+axios.defaults.baseURL = 'http://localhost/todo-laravel/public/api';
+```
+
 ## Build Setup
 
 ``` bash
@@ -11,6 +23,7 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
+# Some steps further
 # build for production with minification
 npm run build
 
