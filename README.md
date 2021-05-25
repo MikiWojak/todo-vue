@@ -12,6 +12,7 @@ The project is the Client for the [Laravel server](https://github.com/MikiWojak/
 ``` javascript
 // Address of the server API - line 6
 axios.defaults.baseURL = 'http://localhost/todo-laravel/public/api';
+// For instance: 'http://todo-laravel.com/api'
 ```
 
 ## Build Setup
