@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 Vue.use(Vuex);
-axios.defaults.baseURL = 'http://localhost/todo-laravel/public/api';
+axios.defaults.baseURL = 'http://localhost/api';
 
 export const store = new Vuex.Store({
     state: {
