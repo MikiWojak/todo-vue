@@ -4,20 +4,22 @@
 
 The project is the Client for the [Laravel server](https://github.com/MikiWojak/todo-laravel)
 
+Based on the tutorial [Vue.js Todo App](https://www.youtube.com/playlist?list=PLEhEHUEU3x5q-xB1On4CsLPts0-rZ9oos)
+
 ## General Setup
 
 - Clone the repository
 - Edit the address of the server API in src/store/store.js
 
-``` javascript
+```javascript
 // Address of the server API - line 6
-axios.defaults.baseURL = 'http://localhost/api';
+axios.defaults.baseURL = "http://localhost/api";
 // For instance: 'http://todo-laravel.com/api'
 ```
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
