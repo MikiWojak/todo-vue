@@ -1,16 +1,29 @@
 <template>
     <div class="todo-item">
         <div class="todo-item-left">
-            <input type="checkbox" v-model="completed" @change="doneEdit">
+            <input type="checkbox" v-model="completed" @change="doneEdit" />
 
-            <div v-if="!editing" @dblclick="editTodo" class="todo-item-label" :class="{ completed: completed }">{{ title }}</div>
+            <div
+                v-if="!editing"
+                @dblclick="editTodo"
+                class="todo-item-label"
+                :class="{ completed: completed }"
+                >{{ title }}</div
+            >
 
-            <input v-else class="todo-item-edit" type="text" v-model="title" @blur="doneEdit" @keyup.enter="doneEdit" v-focus @keyup.esc="cancelEdit">
+            <input
+                v-else
+                class="todo-item-edit"
+                type="text"
+                v-model="title"
+                @blur="doneEdit"
+                @keyup.enter="doneEdit"
+                v-focus
+                @keyup.esc="cancelEdit"
+            />
         </div>
 
-        <div class="remove-item" @click="removeTodo(todo.id)">
-            &times;
-        </div>
+        <div class="remove-item" @click="removeTodo(todo.id)"> &times; </div>
     </div>
 </template>
 
@@ -27,12 +40,12 @@ export default {
 
     data() {
         return {
-            'id': this.todo.id,
-            'title': this.todo.title,
-            'completed': this.todo.completed,
-            'editing': this.todo.editing,
-            'beforeEditCache': ''
-        }
+            id: this.todo.id,
+            title: this.todo.title,
+            completed: this.todo.completed,
+            editing: this.todo.editing,
+            beforeEditCache: ''
+        };
     },
 
     directives: {
@@ -54,24 +67,24 @@ export default {
         },
 
         doneEdit() {
-            if (this.title.trim() === '') { 
+            if (this.title.trim() === '') {
                 this.title = this.beforeEditCache;
             }
 
             this.editing = false;
 
             this.$store.dispatch('updateTodo', {
-                'id': this.id,
-                'title': this.title,
-                'completed': this.completed,
-                'editing': this.editing
+                id: this.id,
+                title: this.title,
+                completed: this.completed,
+                editing: this.editing
             });
         },
 
         cancelEdit() {
             this.title = this.beforeEditCache;
             this.editing = false;
-        },
+        }
     }
-}
+};
 </script>

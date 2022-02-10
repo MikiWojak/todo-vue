@@ -8,12 +8,12 @@ Based on the tutorial [Vue.js Todo App](https://www.youtube.com/playlist?list=PL
 
 ## General Setup
 
-- Clone the repository
-- Edit the address of the server API in src/store/store.js
+-   Clone the repository
+-   Edit the address of the server API in src/store/store.js
 
 ```javascript
 // Address of the server API - line 6
-axios.defaults.baseURL = "http://localhost/api";
+axios.defaults.baseURL = 'http://localhost/api';
 // For instance: 'http://todo-laravel.com/api'
 ```
 
