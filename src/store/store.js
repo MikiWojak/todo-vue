@@ -4,8 +4,6 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
-console.log(process.env);
-
 axios.defaults.baseURL = process.env.API_URL;
 
 export const store = new Vuex.Store({
